@@ -25,4 +25,12 @@ class CardList extends Model
     {
         return $this->belongsTo('App\Models\Board');
     }
+
+    /**
+     * The card list has many cards
+     */
+    public function cards()
+    {
+        return $this->hasMany('App\Models\Card');
+    }
 }
