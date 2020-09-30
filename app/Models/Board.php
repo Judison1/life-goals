@@ -20,7 +20,7 @@ class Board extends Model
     protected $fillable = ['title'];
 
     /**
-     * The board has a user
+     * The board belongs to a user
      */
     public function user()
     {
