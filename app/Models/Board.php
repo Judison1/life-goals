@@ -26,4 +26,12 @@ class Board extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * The board has many card lists
+     */
+    public function cardLists()
+    {
+        return $this->hasMany('App\Models\CardList');
+    }
 }
