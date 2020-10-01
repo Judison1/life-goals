@@ -28,4 +28,12 @@ class Card extends Model
     {
         return $this->belongsTo('App\Models\CardList');
     }
+
+    /**
+     * The card has many tags
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Models\Tag', 'taggable');
+    }
 }
