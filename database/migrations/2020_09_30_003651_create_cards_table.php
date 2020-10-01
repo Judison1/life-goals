@@ -19,6 +19,7 @@ class CreateCardsTable extends Migration
             $table->text('description');
             $table->unsignedBigInteger('rank');
             $table->foreignId('card_list_id');
+            $table->unique(['card_list_id', 'rank']);
             $table->timestamps();
         });
     }
