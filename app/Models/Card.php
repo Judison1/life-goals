@@ -36,4 +36,12 @@ class Card extends Model
     {
         return $this->morphToMany('App\Models\Tag', 'taggable');
     }
+
+    /**
+     * The card has many attachments
+     */
+    public function attachments()
+    {
+        return $this->morphMany('App\Models\Attachment', 'attachable');
+    }
 }
