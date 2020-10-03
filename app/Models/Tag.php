@@ -9,8 +9,6 @@ class Tag extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
-
     /**
      * The tag belongs to many cards
      */
