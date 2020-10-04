@@ -58,4 +58,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * The user has many boards
+     */
+    public function boards()
+    {
+        return $this->hasMany('App\Models\Board');
+    }
 }
