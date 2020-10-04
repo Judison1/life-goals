@@ -26,7 +26,7 @@ class CardFactory extends Factory
         return [
             'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
-            'rank' => $this->faker->unique()->randomNumber,
+            'rank' => 0,
             'card_list_id' => CardList::factory(),
         ];
     }
