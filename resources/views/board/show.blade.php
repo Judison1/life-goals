@@ -20,7 +20,7 @@
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
             </form>
-            <div class="grid md:grid-cols-3 sm:grid-cols-1 lg:grid-cols-4 gap-4 py-3">
+            <div class="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-4 py-3">
                 @foreach($board->cardLists as $cardList)
                     <x-card-list :cardList="$cardList"/>
                 @endforeach

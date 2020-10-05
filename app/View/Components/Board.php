@@ -9,7 +9,9 @@ use App\Models\Board as BordModel;
 class Board extends Component
 {
     public $title;
-    public $link;
+    public $open;
+    public $edit;
+    public $remove;
     public $created_at;
     /**
      * Create a new component instance.
@@ -20,7 +22,9 @@ class Board extends Component
     {
         $this->title = $board->title;
         $this->created_at = $board->created_at;
-        $this->link = route('dashboard::boards.show', $board);
+        $this->open = route('dashboard::boards.show', $board);
+        $this->edit = route('dashboard::boards.edit', $board);
+        $this->remove = route('dashboard::boards.destroy', $board);
     }
 
 

@@ -7,9 +7,11 @@ use App\Models\CardList as CardListModel;
 
 class CardList extends Component
 {
-    public $id;
     public $title;
     public $cards;
+    public $add;
+    public $edit;
+    public $remove;
     /**
      * Create a new component instance.
      *
@@ -20,6 +22,9 @@ class CardList extends Component
         $this->id = $cardList->id;
         $this->title = $cardList->title;
         $this->cards = $cardList->cards;
+        $this->add = route('dashboard::cards.create', ['id' => $cardList->id]);
+        $this->edit = route('dashboard::card-lists.edit', $cardList);
+        $this->remove = route('dashboard::card-lists.destroy', $cardList);
     }
 
     /**
