@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\CardList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,8 +47,8 @@ class CardController extends Controller
                 'rank' => $lastCard?$lastCard->rank + 1:1,
             ]);
             if ($request->hasFile('attachment')) {
-                $storage = $request->attachment->store('attachments');
-                dd($storage);
+                $storage = $request->attachment->store('attachments', 'public');
+                $card->attachments()->create(['file_path' => $storage]);
             }
             DB::commit();
             return redirect()->route('dashboard::boards.show', $cardList->board);
@@ -66,7 +67,9 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        //
+        $card = Card::findOrFail($id);
+
+        return view('card.show', compact('card'));
     }
 
     /**
