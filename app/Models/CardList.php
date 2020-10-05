@@ -9,6 +9,8 @@ class CardList extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title','board_id'];
+
     /**
      * The card list belongs to a board
      */
