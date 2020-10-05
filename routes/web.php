@@ -26,8 +26,11 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::resource('boards', BoardController::class);
         Route::resource('card-lists', CardListController::class);
         Route::name('cards.')->prefix('cards')->group(function () {
-            Route::get('/{id}/create', [CardController::class, 'create'])->name('create');
-            Route::post('/{id}/store', [CardController::class, 'store'])->name('store');
+            Route::get('/create/{id}', [CardController::class, 'create'])->name('create');
+            Route::post('/store/{id}', [CardController::class, 'store'])->name('store');
+            Route::get('/show/{id}', [CardController::class, 'show'])->name('show');
+            Route::get('/edit/{id}', [CardController::class, 'edit'])->name('edit');
+            Route::delete('/destroy/{id}', [CardController::class, 'destroy'])->name('destroy');
         });
 
 });
