@@ -9,6 +9,8 @@ class Card extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title','description','rank', 'card_list_id'];
+
     /**
      * The card belongs to a card list
      */
