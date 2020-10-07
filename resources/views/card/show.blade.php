@@ -12,11 +12,21 @@
                 @if($card->attachments)
                     <h4 class="text-xl mt-3">Anexos</h4>
                 @endif
-                @foreach($card->attachments as $attachment)
-                    <a class="btn btn-outline-info mt-2" target="_blank" href="{{$attachment->link}}">
-                        {{$attachment->file_path}}
-                    </a>
-                @endforeach
+                <div class="row">
+                    @foreach($card->attachments as $attachment)
+                        @if($attachment->is_image)
+                            <img src="{{ asset($attachment->link) }}" class="col-md-4">
+                        @else
+                            <div class="col-md-6">
+                                <a class="btn btn-outline-info w-100 mt-2" target="_blank" href="{{$attachment->link}}">
+                                    {{$attachment->filename}}
+                                </a>
+                            </div>
+
+                        @endif
+                    @endforeach
+                </div>
+
             </div>
         </div>
 

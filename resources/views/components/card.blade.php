@@ -1,4 +1,4 @@
-<div class="card mb-2">
+<div class="card mb-3 shadow border-0">
     <div class="card-header d-flex justify-content-between align-items-center">
         {{ $title }}
         <x-dropdown>
