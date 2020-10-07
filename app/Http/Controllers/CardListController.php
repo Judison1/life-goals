@@ -91,6 +91,15 @@ class CardListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $board = CardList::findOrFail($id);
+            $board->delete();
+            DB::commit();
+            return back()->with('success','Lista de card removida com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível realizar a operação');
+        }
     }
 }

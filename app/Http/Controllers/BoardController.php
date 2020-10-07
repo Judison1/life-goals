@@ -95,6 +95,15 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $board = Board::findOrFail($id);
+            $board->delete();
+            DB::commit();
+            return back()->with('success','Quadro removido com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível realizar a operação');
+        }
     }
 }

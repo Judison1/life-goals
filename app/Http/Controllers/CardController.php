@@ -103,6 +103,15 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $board = Card::findOrFail($id);
+            $board->delete();
+            DB::commit();
+            return back()->with('success','Card removido com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível realizar a operação');
+        }
     }
 }
