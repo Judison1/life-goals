@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardListController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\AttachmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +31,9 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::post('/store/{id}', [CardController::class, 'store'])->name('store');
             Route::get('/show/{id}', [CardController::class, 'show'])->name('show');
             Route::get('/edit/{id}', [CardController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [CardController::class, 'update'])->name('update');
             Route::delete('/destroy/{id}', [CardController::class, 'destroy'])->name('destroy');
         });
+        Route::get('attachment/destroy/{id}', [AttachmentController::class, 'destroy'])->name('attachments.destroy');
 
-});
+    });
