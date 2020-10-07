@@ -80,7 +80,9 @@ class CardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $card = Card::findOrFail($id);
+
+        return view('card.edit', compact('card'));
     }
 
     /**
@@ -92,7 +94,20 @@ class CardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $card = Card::findOrFail($id);
+            $card->update($request->all());
+            if ($request->hasFile('attachment')) {
+                $storage = $request->attachment->store('attachments', 'public');
+                $card->attachments()->create(['file_path' => $storage]);
+            }
+            DB::commit();
+            return redirect()->route('dashboard::boards.show', $card->cardList->board);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível realizar a operação');
+        }
     }
 
     /**
@@ -103,6 +118,15 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $card = Card::findOrFail($id);
+            $card->delete();
+            DB::commit();
+            return back()->with('success','Card removido com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível realizar a operação');
+        }
     }
 }

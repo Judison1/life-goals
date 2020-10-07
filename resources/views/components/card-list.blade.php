@@ -1,4 +1,4 @@
-<div class="shadow-sm bg-white rounded p-2">
+<div class="shadow-sm bg-white rounded p-4">
     <div class="d-flex justify-content-between align-items-center mb-2">
         <h4 class="text-xl">{{$title}}</h4>
         <x-dropdown>
