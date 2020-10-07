@@ -68,7 +68,8 @@ class CardListController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cardList = CardList::findOrFail($id);
+        return view('card-list.edit', compact('cardList'));
     }
 
     /**
@@ -80,7 +81,16 @@ class CardListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $cardList = $cardList = CardList::findOrFail($id);
+            $cardList->update($request->all());
+            DB::commit();
+            return redirect()->route('dashboard::boards.show', $cardList->board)->with('success','Registro alterado com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível atualizar o registro');
+        }
     }
 
     /**
@@ -93,8 +103,8 @@ class CardListController extends Controller
     {
         DB::beginTransaction();
         try {
-            $board = CardList::findOrFail($id);
-            $board->delete();
+            $cardList = CardList::findOrFail($id);
+            $cardList->delete();
             DB::commit();
             return back()->with('success','Lista de card removida com sucesso!');
         } catch (\Exception $e) {

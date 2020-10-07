@@ -72,7 +72,8 @@ class BoardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $board = Auth::user()->boards()->findOrFail($id);
+        return view('board.edit', compact('board'));
     }
 
     /**
@@ -84,7 +85,16 @@ class BoardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $board = Auth::user()->boards()->findOrFail($id);
+            $board->update($request->all());
+            DB::commit();
+            return redirect()->route('dashboard::boards.index')->with('success','Registro alterado com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Não foi possível atualizar o registro');
+        }
     }
 
     /**
