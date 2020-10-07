@@ -1,4 +1,4 @@
-<div class="text-white bg-indigo-600 shadow sm:rounded-lg hover:bg-indigo-500 hover:text-white">
+<div class="text-white card-board shadow sm:rounded-lg hover:text-white">
     <div class="d-flex justify-content-end">
         <x-dropdown>
             <a href="{{$edit}}" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-green-500 hover:text-white">
