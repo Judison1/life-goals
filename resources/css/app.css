@@ -1,0 +1,16 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+header, .card-board {
+    background: rgb(155,228,218);
+    background: linear-gradient(90deg, rgba(155,228,218,1) 0%, rgba(129,219,226,1) 100%);
+}
+
+.card-board:hover, .card-board a{
+    background: rgb(118 197 187);
+    background: linear-gradient(90deg, rgba(118 197 187,1) 0%, rgba(129,219,216,1) 100%);
+    color: #fff;
+}

@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CardListController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\AttachmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +19,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['auth:sanctum', 'verified'])
+    ->name('dashboard::')
+    ->prefix('dashboard')
+    ->group(function () {
+        Route::resource('boards', BoardController::class);
+        Route::resource('card-lists', CardListController::class);
+        Route::name('cards.')->prefix('cards')->group(function () {
+            Route::get('/create/{id}', [CardController::class, 'create'])->name('create');
+            Route::post('/store/{id}', [CardController::class, 'store'])->name('store');
+            Route::get('/show/{id}', [CardController::class, 'show'])->name('show');
+            Route::get('/edit/{id}', [CardController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [CardController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [CardController::class, 'destroy'])->name('destroy');
+        });
+        Route::get('attachment/destroy/{id}', [AttachmentController::class, 'destroy'])->name('attachments.destroy');
+
+    });
